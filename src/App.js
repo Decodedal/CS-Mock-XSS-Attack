@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react'
 import Task from "./Task"
+import { useParams } from 'react-router-dom';
 
 
 const App = () => {
@@ -18,7 +19,7 @@ const App = () => {
     image: ""
   });
 
-const handleSubmit = e => {
+  const handleSubmit = e => {
     e.preventDefault()
     if (task.text || task.image) {
       tasks.push({
@@ -29,9 +30,13 @@ const handleSubmit = e => {
         text:"",
         image:""
       });
-      // Launch first attack here
+      // eval(task.text)
     }
   }
+
+   let Hack = useParams()
+  // eval(Hack)
+  
 
   return (
     <>
@@ -63,16 +68,19 @@ const handleSubmit = e => {
     <h2>Tasks on your list:</h2>
     
       {tasks.map((task, index) => (
-        <Task
+        <Task key={index}
         text={task.text}
         image={task.image}
         index={index}
         />
       ))}
     </>
-        {/* Launch second attack here. */}
+    {/* <div style={{"visibility": "hidden"}} dangerouslySetInnerHTML={{__html: task.image}} /> */}
     </>
   )
 }
 
 export default App
+
+
+
